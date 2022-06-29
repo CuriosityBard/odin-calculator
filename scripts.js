@@ -16,6 +16,9 @@ function multiply(a, b) {
     return a * b;
 }
 function divide(a, b) {
+    if (b === 0) {
+        return "Nice try, bucko.";
+    }
     return a / b;
 }
 
@@ -74,20 +77,41 @@ function clearInput() {
 function parseInput() {
     let inputs = calculator.currentInput.split(' ');
 
-    let operand1, operand2;
+    let operand1, operand2, operator;
 
-    if (inputs[0].includes('.')) {
-        operand1 = parseFloat(inputs[0]);
-    } else {
-        operand1 = parseInt(inputs[0]);
+    try {
+        operator = inputs[1];
+
+        if (inputs[0].includes('.')) {
+            operand1 = parseFloat(inputs[0]);
+        } else {
+            operand1 = parseInt(inputs[0]);
+        }
+
+        if (inputs[2].includes('.')) {
+            operand2 = parseFloat(inputs[2]);
+        } else {
+            operand2 = parseInt(inputs[2]);
+        }
+    } catch (err) {
+        // assign sensible values to missing ones
+        if (!operand1) {
+            operand1 = 0;
+        }
+        if (!operator) {
+            operator = "+";
+        }
+        if (!operand2) {
+            switch(operator) {
+                case '/':
+                case '*':
+                    operand2 = 1;
+                    break;
+                default: 
+                    operand2 = 0;
+            }
+        }
     }
-    if (inputs[2].includes('.')) {
-        operand2 = parseFloat(inputs[2]);
-    } else {
-        operand2 = parseInt(inputs[2]);
-    }
-    
-    let operator = inputs[1];
 
     let result = operate(operand1, operand2, operator).toString();
 
@@ -99,6 +123,7 @@ function parseInput() {
 // to take values from the buttons and add them to the screen
 function appendValue(val) {
     let appendThis;
+
     switch(val) {
         case 1:
         case 2:
@@ -129,6 +154,12 @@ function appendValue(val) {
             checkOperators(calculator.currentInput);
             appendThis = " " + val.toString(); 
     }
+
+    // if last calculation was divide by 0, reset the screen before proceeding:
+    if (calculator.currentInput === "Nice try, bucko.") {
+        calculator.currentInput = "";
+    }
+
     calculator.currentInput += appendThis;
 
     // display on screen: 
