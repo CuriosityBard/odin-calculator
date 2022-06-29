@@ -58,12 +58,12 @@ function clearInput() {
 function parseInput() {
     let inputs = calculator.currentInput.split(' ');
 
-    let operand1 = inputs[0];
-    let operand2 = inputs[2];
+    let operand1 = parseInt(inputs[0]);
+    let operand2 = parseInt(inputs[2]);
 
     let operator = inputs[1];
 
-    let result = operate(operand1, operand2, operator);
+    let result = operate(operand1, operand2, operator).toString();
 
     // update the data and screen with the result
     calculator.dom.screen.textContent = result;
