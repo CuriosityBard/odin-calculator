@@ -33,6 +33,21 @@ function operate(a, b, op) {
     }
 }
 
+// if there are two spaces in a string, we want to operate before using the next operator
+checkStringForSpaces(input) {
+    let spaceCounter = 0;
+
+    for (char of input) {
+        if (char === " ") {
+            spaceCounter++
+        } 
+
+        if (spaceCounter === 2) {
+            // operator function will go here
+        }
+    }
+}
+
 // to take values from the buttons and add them to the screen
 function appendValue(val) {
     let appendThis;
