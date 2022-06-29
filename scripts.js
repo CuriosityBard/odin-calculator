@@ -48,6 +48,20 @@ function checkStringForSpaces(input) {
     }
 }
 
+// if there is already an operator, replace it instead of adding another
+function checkOperators(input) {
+    switch(input.slice(input.length - 1)) {
+        case '+':
+        case '-':
+        case '*':
+        case '/':
+            calculator.currentInput = input.slice(0, input.length - 2);
+            break;
+        default: 
+            break;
+    }
+}
+
 // reset calculator to blank
 function clearInput() {
     calculator.currentInput = "";
@@ -96,6 +110,7 @@ function appendValue(val) {
             }
             break;
         default:
+            checkOperators(calculator.currentInput);
             appendThis = " " + val.toString(); 
     }
     calculator.currentInput += appendThis;
