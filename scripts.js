@@ -72,6 +72,15 @@ function clearInput() {
     calculator.currentInput = "";
     calculator.dom.screen.textContent = "";
 }
+// remove last value, and space if necessary 
+function backspace() {
+    if (calculator.currentInput.slice(calculator.currentInput.length - 2, calculator.currentInput.length - 1) === ' ') {
+        calculator.currentInput = calculator.currentInput.slice(0, calculator.currentInput.length - 2);
+    } else {
+        calculator.currentInput = calculator.currentInput.slice(0, calculator.currentInput.length - 1);
+    }
+    calculator.dom.screen.textContent = calculator.currentInput;
+}
 
 // determine operator and operand; then, call proper operate() function 
 function parseInput() {
