@@ -49,8 +49,8 @@ checkStringForSpaces(input) {
 }
 
 // determine operator and operand; then, call proper operate() function 
-parseInput(input) {
-    let inputs = input.split(' ');
+parseInput() {
+    let inputs = calculator.currentInput.split(' ');
 
     let operand1 = inputs[0];
     let operand2 = inputs[2];
