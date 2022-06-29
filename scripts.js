@@ -2,6 +2,7 @@ const calculator = {
     currentInput: "",
     dom: {
         screen: document.querySelector('#screen-text'),
+        keyboardListener: document.querySelector('#keyboard-listener')
     }
 }
 
@@ -174,3 +175,44 @@ function appendValue(val) {
     // display on screen: 
     calculator.dom.screen.textContent = calculator.currentInput;
 }
+
+// handle keyboard input 
+function handleKeyboard(event) {
+    console.log(event.key);
+
+    switch(event.key) {
+        case '0':
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+        case '5':
+        case '6':
+        case '7':
+        case '8':
+        case '9':
+        case '0':
+            appendValue(parseInt(event.key));
+            break;
+        case '/':
+        case '*':
+        case '-':
+        case '+':
+        case '.':
+            appendValue(event.key);
+            break;
+        case '=':
+        case 'Enter':
+            parseInput();
+            break;
+        case 'Backspace':
+            backspace();
+            break;
+        case 'Delete':
+            clearInput();
+            break;
+    }
+}
+
+// event listener
+document.addEventListener('keydown', handleKeyboard);
