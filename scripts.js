@@ -34,7 +34,7 @@ function operate(a, b, op) {
 }
 
 // if there are two spaces in a string, we want to operate before using the next operator
-checkStringForSpaces(input) {
+function checkStringForSpaces(input) {
     let spaceCounter = 0;
 
     for (char of input) {
@@ -48,8 +48,14 @@ checkStringForSpaces(input) {
     }
 }
 
+// reset calculator to blank
+function clearInput() {
+    calculator.currentInput = "";
+    calculator.dom.screen.textContent = "";
+}
+
 // determine operator and operand; then, call proper operate() function 
-parseInput() {
+function parseInput() {
     let inputs = calculator.currentInput.split(' ');
 
     let operand1 = inputs[0];
