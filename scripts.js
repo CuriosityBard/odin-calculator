@@ -55,6 +55,7 @@ function checkOperators(input) {
         case '-':
         case '*':
         case '/':
+        case '.':
             calculator.currentInput = input.slice(0, input.length - 2);
             break;
         default: 
@@ -109,6 +110,9 @@ function appendValue(val) {
                     appendThis = val.toString();
             }
             break;
+        case '.': 
+            checkOperators(calculator.currentInput);
+            appendThis = val;
         default:
             checkOperators(calculator.currentInput);
             appendThis = " " + val.toString(); 
