@@ -55,9 +55,10 @@ function checkOperators(input) {
         case '-':
         case '*':
         case '/':
-        case '.':
             calculator.currentInput = input.slice(0, input.length - 2);
             break;
+        case '.':
+            calculator.currentInput = input.slice(0, input.length - 1);
         default: 
             break;
     }
@@ -73,9 +74,19 @@ function clearInput() {
 function parseInput() {
     let inputs = calculator.currentInput.split(' ');
 
-    let operand1 = parseInt(inputs[0]);
-    let operand2 = parseInt(inputs[2]);
+    let operand1, operand2;
 
+    if (inputs[0].includes('.')) {
+        operand1 = parseFloat(inputs[0]);
+    } else {
+        operand1 = parseInt(inputs[0]);
+    }
+    if (inputs[2].includes('.')) {
+        operand2 = parseFloat(inputs[2]);
+    } else {
+        operand2 = parseInt(inputs[2]);
+    }
+    
     let operator = inputs[1];
 
     let result = operate(operand1, operand2, operator).toString();
@@ -112,7 +123,8 @@ function appendValue(val) {
             break;
         case '.': 
             checkOperators(calculator.currentInput);
-            appendThis = val;
+            appendThis = val.toString();
+            break;
         default:
             checkOperators(calculator.currentInput);
             appendThis = " " + val.toString(); 
