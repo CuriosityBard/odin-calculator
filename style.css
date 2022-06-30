@@ -1,0 +1,53 @@
+main {
+    width: 500px;
+    height: 600px;
+}
+
+.buttons {
+    display: grid;
+    grid-template-areas: 
+        "main main main op op"
+        "main main main op op"
+        "main main main op op"
+        "zero back back clear clear";
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.calc-button {
+    height: 120px;
+}
+
+#main-button-section {
+    grid-area: main;
+}
+#main-button-section .calc-button {
+    flex-basis: 33%;
+}
+
+#main-button-section,
+#operator-buttons {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: space-between;
+}
+
+#operator-buttons {
+    grid-area: op;
+}
+#operator-buttons .calc-button {
+    flex-basis: 49.5%;
+}
+#zero {
+    grid-area: zero;
+}
+#equals {
+    grid-area: back;
+}
+#clear {
+    grid-area: clear;
+}
+#screen {
+    height: 120px;
+    width: 100%;
+}
