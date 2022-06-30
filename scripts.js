@@ -193,9 +193,12 @@ function appendValue(val) {
         case '-':
             if (calculator.currentInput.length === 0) {
                 appendThis = val;
-            } else {
+            } else if (tooManyOperators()) {
+                parseInput();
                 appendThis = " " + val;
-            }
+            } else if (typeof calculator.currentInput[calculator.currentInput.length - 1] !== 'number') {
+                appendThis = " " + val;
+            } 
             break;
         default:
             if (tooManyOperators()) {
