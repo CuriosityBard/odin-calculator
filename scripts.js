@@ -87,6 +87,11 @@ function backspace() {
 function parseInput() {
     let inputs = calculator.currentInput.split(' ');
 
+    // this is to fix an issue where negative first operand added another item at the beginning of the array 
+    if (inputs.includes("")) {
+        inputs.shift();
+    }
+
     let operand1, operand2, operator;
 
     try {
@@ -158,25 +163,47 @@ function appendValue(val) {
         case 0:
             switch (calculator.currentInput.slice(calculator.currentInput.length - 1)) {
                 case '+':
-                case '-':
                 case '*':
                 case '/':
                     appendThis = " " + val.toString(); 
                     break;
+                case '-':
+                    if (calculator.currentInput.length > 2 && !calculator.currentInput.slice(0, calculator.currentInput.length - 2).includes(" ")) {
+                        appendThis = " " + val.toString();
+                        break;
+                    }
+                    switch (calculator.currentInput.slice(calculator.currentInput.length - 2))  {
+                        case '+':
+                        case '*':
+                        case '/':
+                        case '-':
+                            appendThis = val.toString(); 
+                            break;
+                        default: 
+                            appendThis = " " + val.toString();
+                    }
                 default:
                     appendThis = val.toString();
             }
             break;
         case '.': 
             checkOperators(calculator.currentInput);
-            appendThis = val.toString();
+            appendThis = val;
+            break;
+        case '-':
+            if (calculator.currentInput.length === 0) {
+                appendThis = val;
+            } else {
+                appendThis = " " + val;
+            }
             break;
         default:
             if (tooManyOperators()) {
                 parseInput();
             }
+
             checkOperators(calculator.currentInput);
-            appendThis = " " + val.toString(); 
+            appendThis = " " + val; 
     }
 
     // if last calculation was divide by 0, reset the screen before proceeding:
@@ -192,8 +219,6 @@ function appendValue(val) {
 
 // handle keyboard input 
 function handleKeyboard(event) {
-    console.log(event.key);
-
     switch(event.key) {
         case '0':
         case '1':
