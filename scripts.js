@@ -130,6 +130,17 @@ function parseInput() {
     calculator.currentInput = result;
 }
 
+// returns true if there is already an operator in the middle
+function tooManyOperators() {
+    let parts = calculator.currentInput.split(' ');
+
+    if (parts.length >= 3) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 // to take values from the buttons and add them to the screen
 function appendValue(val) {
     let appendThis;
@@ -161,6 +172,9 @@ function appendValue(val) {
             appendThis = val.toString();
             break;
         default:
+            if (tooManyOperators()) {
+                parseInput();
+            }
             checkOperators(calculator.currentInput);
             appendThis = " " + val.toString(); 
     }
