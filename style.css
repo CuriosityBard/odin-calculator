@@ -1,6 +1,10 @@
 main {
-    width: 500px;
-    height: 600px;
+    width: 600px;
+    height: fit-content;
+
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
 }
 
 .buttons {
@@ -15,6 +19,9 @@ main {
 
 .calc-button {
     height: 120px;
+
+    font-family: 'Space Mono', monospace;
+    font-size: 40px;
 }
 
 #main-button-section {
@@ -47,7 +54,28 @@ main {
 #clear {
     grid-area: clear;
 }
+
+#calc-buttons {
+    width: 90%;
+}
+
 #screen {
-    height: 120px;
+    box-sizing: border-box; 
+
+    height: 160px;
     width: 100%;
+
+    background-color: black;
+    color: yellow;
+
+    padding: 20px;
+    margin-bottom: 20px;
+
+    font-family: 'Press Start 2P', monospace;
+    font-size: 40px;
+}
+#screen-text {
+    margin: 0;
+
+    word-break: break-all;
 }
