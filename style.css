@@ -1,10 +1,52 @@
+html {
+    background-color: #F3F4F6;
+}
+
 main {
     width: 600px;
-    height: fit-content;
+    height: 720px;
+
+    box-sizing: border-box;
+
+    padding: 30px;
 
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
+
+    background-color: #A393BF;
+
+    box-shadow: 10px 10px #9882AC;
+}
+main::before {
+    display: block;
+    content: '';
+
+    position: absolute;
+    top: 728px;
+    left: 14px;
+    
+    background-color: #87719b;
+
+    width: 600px;
+    height: 10px;
+    
+    transform: skewX(45deg);
+}
+main::after {
+    display: block;
+    content: '';
+
+    position: absolute;
+    top: 12px;
+    left: 608px;
+
+    background-color: #9882AC;
+
+    width: 10px;
+    height: 12px;
+
+    transform: skewY(45deg);
 }
 
 .buttons {
@@ -22,6 +64,13 @@ main {
 
     font-family: 'Space Mono', monospace;
     font-size: 40px;
+
+    background-color: #373F51;
+    color: #F3F4F6;
+
+    border: solid 3px #292F3D;
+    border-radius: 5px;
+    outline: solid 1px #A9BCD0;
 }
 
 #main-button-section {
@@ -73,6 +122,8 @@ main {
 
     font-family: 'Press Start 2P', monospace;
     font-size: 40px;
+
+    overflow-y: auto;
 }
 #screen-text {
     margin: 0;
